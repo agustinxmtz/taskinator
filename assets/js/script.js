@@ -41,6 +41,7 @@ var createTaskEl = function(taskDataObj) {
   var listItemEl = document.createElement("li");
   listItemEl.className = "task-item";
   listItemEl.setAttribute("data-task-id", taskIdCounter);
+  listItemEl.setAttribute("draggable", "true");
 
   var taskInfoEl = document.createElement("div");
   taskInfoEl.className = "task-info";
@@ -176,6 +177,15 @@ var deleteTask = function(taskId) {
   taskSelected.remove();
 };
 
+var dragTaskHandler = function(event) {
+    var taskId = event.target.getAttribute("data-task-id");
+    event.dataTransfer.setData("text/plain", taskId);
+    var getId = event.dataTransfer.getData("text/plain");
+    console.log("getId:", getId, typeof getId);
+}
+
+
+pageContentEl.addEventListener("dragstart", dragTaskHandler);
 // Create a new task
 formEl.addEventListener("submit", taskFormHandler);
 
