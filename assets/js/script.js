@@ -184,7 +184,14 @@ var dragTaskHandler = function(event) {
     console.log("getId:", getId, typeof getId);
 }
 
+var dropZoneDragHandler = function(event) {
+    var taskListEl = event.target.closest(".task-list");
+    if(taskListEl) {
+        event.preventDefault();
+    }
+};
 
+pageContentEl.addEventListener("dragover", dropZoneDragHandler);
 pageContentEl.addEventListener("dragstart", dragTaskHandler);
 // Create a new task
 formEl.addEventListener("submit", taskFormHandler);
